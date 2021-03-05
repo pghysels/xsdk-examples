@@ -14,8 +14,14 @@ endif()
 
 add_executable(transient-heat transient-heat.cpp)
 target_link_libraries(transient-heat PRIVATE XSDK::MFEM XSDK::SUNDIALS XSDK::HYPRE PETSC::ALL ZLIB::ZLIB)
+if(ENABLE_CUDA)
+  target_link_libraries(transient-heat PRIVATE CUDA::cublas CUDA::cusparse CUDA::cusolver)
+endif()
 
 add_executable(advection advection.cpp)
 target_link_libraries(advection PRIVATE XSDK::MFEM XSDK::SUNDIALS XSDK::HYPRE PETSC::ALL ZLIB::ZLIB)
+if(ENABLE_CUDA)
+  target_link_libraries(advection PRIVATE CUDA::cublas CUDA::cusparse CUDA::cusolver)
+endif()
 
 install(TARGETS transient-heat RUNTIME DESTINATION bin)

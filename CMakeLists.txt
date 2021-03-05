@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.17)
 project(xsdk-examples
         DESCRIPTION "xSDK Examples"
         LANGUAGES CXX C)
@@ -36,6 +36,7 @@ set(METIS_DIR "${METIS_DIR}" CACHE PATH "Path to Metis installation directory")
 if(ENABLE_CUDA)
   enable_language(CUDA)
   set(CMAKE_CUDA_HOST_COMPILER ${CMAKE_CXX_COMPILER})
+  find_package(CUDAToolkit REQUIRED)
 endif()
 
 # check for hypre

@@ -16,5 +16,8 @@ add_executable(mfem_ex1_gko mfem_ex1_gko.cpp)
 target_sources(mfem_ex1_gko PRIVATE mfem_ex1_gko.cpp mfem_wrapper.cpp)
 
 target_link_libraries(mfem_ex1_gko PRIVATE XSDK::MFEM XSDK::SUNDIALS XSDK::HYPRE Ginkgo::ginkgo PETSC::ALL ${METIS_LIBRARY} ZLIB::ZLIB)
+if(ENABLE_CUDA)
+  target_link_libraries(mfem_ex1_gko PRIVATE CUDA::cublas CUDA::cusparse CUDA::cusolver)
+endif()
 
 install(TARGETS mfem_ex1_gko RUNTIME DESTINATION bin)

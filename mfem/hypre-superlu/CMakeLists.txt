@@ -11,5 +11,8 @@ endif()
 
 add_executable(convdiff convdiff.cpp)
 target_link_libraries(convdiff PRIVATE XSDK::MFEM PETSC::ALL XSDK::SUNDIALS XSDK::HYPRE XSDK::SUPERLU ZLIB::ZLIB)
+if(ENABLE_CUDA)
+  target_link_libraries(convdiff PRIVATE CUDA::cublas CUDA::cusparse CUDA::cusolver)
+endif()
 
 install(TARGETS convdiff RUNTIME DESTINATION bin)

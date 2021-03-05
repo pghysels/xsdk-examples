@@ -12,5 +12,8 @@ endif()
 
 add_executable(obstacle obstacle.cpp)
 target_link_libraries(obstacle PRIVATE XSDK::MFEM XSDK::HYPRE XSDK::SUNDIALS PETSC::ALL ZLIB::ZLIB)
+if(ENABLE_CUDA)
+  target_link_libraries(obstacle PRIVATE CUDA::cusparse)
+endif()
 
 install(TARGETS obstacle RUNTIME DESTINATION bin)
