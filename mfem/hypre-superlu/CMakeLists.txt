@@ -5,6 +5,10 @@ project( convdiff
 
 set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
 
+if(ENABLE_CUDA)
+  set_source_files_properties(convdiff.cpp PROPERTIES LANGUAGE CUDA)
+endif()
+
 add_executable(convdiff convdiff.cpp)
 target_link_libraries(convdiff PRIVATE XSDK::MFEM PETSC::ALL XSDK::SUNDIALS XSDK::HYPRE XSDK::SUPERLU ZLIB::ZLIB)
 

@@ -8,6 +8,10 @@ set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
 
 option(ENABLE_MFEM "Enable MFEM" ON)
 
+if(ENABLE_CUDA)
+  set_source_files_properties(mfem_ex1_gko.cpp PROPERTIES LANGUAGE CUDA)
+endif()
+
 add_executable(mfem_ex1_gko mfem_ex1_gko.cpp)
 target_sources(mfem_ex1_gko PRIVATE mfem_ex1_gko.cpp mfem_wrapper.cpp)
 

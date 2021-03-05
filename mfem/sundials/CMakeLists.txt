@@ -6,6 +6,12 @@ project(transient-heat
 set(CMAKE_C_COMPILER ${MPI_C_COMPILER})
 set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
 
+
+if(ENABLE_CUDA)
+  set_source_files_properties(transient-heat.cpp PROPERTIES LANGUAGE CUDA)
+  set_source_files_properties(advection.cpp PROPERTIES LANGUAGE CUDA)
+endif()
+
 add_executable(transient-heat transient-heat.cpp)
 target_link_libraries(transient-heat PRIVATE XSDK::MFEM XSDK::SUNDIALS XSDK::HYPRE PETSC::ALL ZLIB::ZLIB)
 

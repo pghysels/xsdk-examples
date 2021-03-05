@@ -6,6 +6,10 @@ project( obstacle
 set(CMAKE_C_COMPILER ${MPI_C_COMPILER})
 set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
 
+if(ENABLE_CUDA)
+  set_source_files_properties(obstacle.cpp PROPERTIES LANGUAGE CUDA)
+endif()
+
 add_executable(obstacle obstacle.cpp)
 target_link_libraries(obstacle PRIVATE XSDK::MFEM XSDK::HYPRE XSDK::SUNDIALS PETSC::ALL ZLIB::ZLIB)
 
