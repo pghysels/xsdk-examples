@@ -33,12 +33,6 @@ set(TRILINOS_DIR "${Trilinos_DIR}" CACHE PATH "Path to Trilinos installation dir
 
 set(METIS_DIR "${METIS_DIR}" CACHE PATH "Path to Metis installation directory")
 
-if(ENABLE_CUDA)
-  enable_language(CUDA)
-  set(CMAKE_CUDA_HOST_COMPILER ${CMAKE_CXX_COMPILER})
-  find_package(CUDAToolkit REQUIRED)
-endif()
-
 # check for hypre
 if(ENABLE_HYPRE)
   find_package(HYPRE REQUIRED)
@@ -79,6 +73,13 @@ find_package(METIS)
 
 # check for MPI
 find_package(MPI REQUIRED)
+
+# check for CUDA
+if(ENABLE_CUDA)
+  enable_language(CUDA)
+  set(CMAKE_CUDA_HOST_COMPILER ${MPI_CXX_COMPILER})
+  find_package(CUDAToolkit REQUIRED)
+endif()
 
 # example subdirectories
 if(ENABLE_HYPRE)
